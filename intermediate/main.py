@@ -19,6 +19,7 @@ my_posts = [
 ]
 
 
+
 @app.get("/")
 async def root():
     return {"msg": "Welcome to my APIs"}
@@ -35,3 +36,9 @@ def create_post(post: Post):
     post_dict["id"] = randrange(3, 1000000)
     my_posts.append(post_dict)
     return {"data": post_dict}
+
+@app.get("/posts/{id}")
+def get_post(id):
+    print(id)
+    return {"post details":f"Here is post {id}"}
+
