@@ -19,6 +19,11 @@ my_posts = [
 ]
 
 
+def find_post(id):
+    for p in my_posts:
+        if p["id"] == id:
+            return p
+
 
 @app.get("/")
 async def root():
@@ -37,8 +42,8 @@ def create_post(post: Post):
     my_posts.append(post_dict)
     return {"data": post_dict}
 
-@app.get("/posts/{id}")
-def get_post(id):
-    print(id)
-    return {"post details":f"Here is post {id}"}
 
+@app.get("/posts/{id}")
+def get_post(id: int):
+    post = find_post(id)
+    return {"post details": post}
